@@ -1,16 +1,16 @@
 <?php
 $username = $_POST['uname'];
 $passwordwithout=$_POST['psw'];
-$passhash=sha1( $passwordwithout ), "\n";
-$i=0;
-include 'db_connect.php';
+$passhash=sha1( $passwordwithout );
+include 'connect.php';
 $id_exists = false;
-$username = mysql_real_escape_string($_GET['id']);
-$sql = "SELECT id FROM members WHERE id='$username'";
-$result = mysql_query($sql);
+$username = mysqli_real_escape_string($_GET['username']);
+$sql = "SELECT username FROM sqlinjcheck WHERE username='$username' ";
+$result = mysqli_query($sql);
 
 if ($result == $username)
 {
+        $flag=1;
         $id_exists = true;
 }
 
@@ -33,6 +33,7 @@ while(! feof($file))
 			echo '<script language="javascript">';
 			echo 'alert("User successfully logged in")';
 			echo '</script>';
+      $flag = $flag + 1;
 		}
 		else
 		{
@@ -44,4 +45,5 @@ while(! feof($file))
 
 //fclose($file1);
 fclose($file);
+
 ?>

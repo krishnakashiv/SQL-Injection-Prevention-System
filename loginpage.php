@@ -104,12 +104,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -127,16 +127,16 @@ span.psw {
 </head>
 <body>
 
-<h2>Modal Login Form</h2>
+<h2>Login Form</h2>
 
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
 <div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="/action_page.php">
+
+  <form class="modal-content animate" method="POST" action="/proj/action_page.php">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      <img src="avatar.png" alt="Avatar" class="avatar" style="width:250px;height:250px;">
     </div>
 
     <div class="container">
@@ -144,8 +144,8 @@ span.psw {
       <input type="text" placeholder="Enter Username" name="uname" required>
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-        
+      <input type="password" placeholder="Enter Password" name="psw" maxlength="3" pattern="[A-Za-z]{3}" required>
+
       <button type="submit">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
