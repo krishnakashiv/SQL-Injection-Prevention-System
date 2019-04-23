@@ -1,19 +1,20 @@
 <?php
+
+
 $uname = $_POST['uname'];
 $passwordwithout=$_POST['psw'];
 $passhash=sha1( $passwordwithout );
 //echo $passhash;
 include 'connect.php';
-$id_exists = false;
 
 $i=0;
 
 
 
 
-
+//db checking
 $sql  = "SELECT username FROM maindb WHERE username ='$uname' and passhash='$passwordwithout'";
-$found=mysqli_query($connect,$sql);
+$found=mysqli_query($connect,$sql) or die("Possible SQL injection attack.");
 
 if (mysqli_num_rows($found) != null )
 {
@@ -22,7 +23,9 @@ if (mysqli_num_rows($found) != null )
       echo '</script>';
     $i=1;
 } else {
-    echo "not found :'(";
+  echo '<script language="javascript">';
+   echo 'alert("Username Does not exist")';
+   echo '</script>';
 }
 
 $file=fopen('hashes1.txt', 'r');
@@ -51,11 +54,12 @@ while(!feof($file))
       echo '<script language="javascript">';
       echo 'alert("User successfully logged in")';
       echo '</script>';
+
     }
 		else
 		{
 			echo '<script language="javascript">';
-			echo 'alert("chutiya mat kaat")';
+			echo 'alert("Invalid password")';
 			echo '</script>';
 		}
 
@@ -65,5 +69,4 @@ while(!feof($file))
 
 //fclose($file1);
 fclose($file);
-
 ?>
